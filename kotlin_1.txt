@@ -1,0 +1,31 @@
+fun main() {
+    // Variables implícitas (tipo inferido automáticamente)
+    var nombre = "Juan"
+    var edad = 25
+    var altura = 1.75
+    var esEstudiante = true
+    var inicial = 'J'
+
+    // Variables explícitas (tipo declarado)
+    var ciudad: String = "Madrid"
+    var año: Int = 2025
+    var temperatura: Double = 23.4
+    var aprobado: Boolean = false
+    var letra: Char = 'K'
+
+    // Constantes implícitas (tipo inferido)
+    val pais = "España"
+    val poblacion = 47000000
+    val precio = 19.99
+    val activo = true
+    val simbolo = '$'
+
+    // Constantes explícitas (tipo declarado)
+    val continente: String = "Europa"
+    val horasDia: Int = 24
+    val pi: Double = 3.1416
+    val esNoche: Boolean = false
+    val grado: Char = 'C'
+
+    println("Nombre: $nombre, Edad: $edad, Ciudad: $ciudad, País: $pais")
+}
