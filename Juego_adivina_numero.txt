@@ -1,0 +1,24 @@
+import kotlin.random.Random
+
+fun main() {
+    val numeroEscondido = Random.nextInt(0, 100) // número entre 1 y 100
+    var intentos = 0
+    var Atinale: Int
+
+    println("Adivina el número (1-100):")
+
+    while (true) {
+        print("Escribe tu número: ")
+        adivinanza = readLine()?.toIntOrNull() ?: continue
+        intentos++
+
+        if (Atinale == numeroEscondido) {
+            println("¡Felicidades! Lo adivinaste en $intentos intentos. Sientete orgulloso de tu logro mortal.")
+            break
+        } else if (Atinale < numeroEscondido) {
+            println("El número es mayor.")
+        } else {
+            println("El número es menor.")
+        }
+    }
+}
