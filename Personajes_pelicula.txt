@@ -1,0 +1,89 @@
+// Replicando personajes y elementos de "Los Juegos del Hambre"
+// Clases: Distrito, Habilidad, Personaje, Tributo, Mentor
+
+// Clase que representa un distrito
+data class Distrito(val numero: Int, val recursoPrincipal: String)
+
+// Clase que representa una habilidad de un personaje
+class Habilidad(val nombre: String) {
+    fun usar(): String {
+        return "El personaje usa la habilidad de $nombre"
+    }
+}
+
+// Clase base para cualquier personaje
+open class Personaje(
+    val nombre: String,
+    val edad: Int,
+    val distrito: Distrito
+) {
+    open fun presentacion(): String {
+        return "Soy $nombre, tengo $edad años y provengo del Distrito ${distrito.numero}"
+    }
+}
+
+// Clase Tributo que hereda de Personaje
+class Tributo(
+    nombre: String,
+    edad: Int,
+    distrito: Distrito,
+    val habilidades: List<Habilidad> = emptyList()
+) : Personaje(nombre, edad, distrito) {
+    
+    override fun presentacion(): String {
+        return "Soy $nombre, tributo del Distrito ${distrito.numero}, y que la suerte este siempre de su lado"
+    }
+
+    fun mostrarHabilidades(): String {
+        return if (habilidades.isEmpty()) {
+            "$nombre no tiene habilidades especiales"
+        } else {
+            habilidades.joinToString { it.nombre }
+        }
+    }
+}
+
+// Clase Mentor que también hereda de Personaje
+class Mentor(
+    nombre: String,
+    edad: Int,
+    distrito: Distrito,
+    val experiencia: Int // años de experiencia
+) : Personaje(nombre, edad, distrito) {
+    
+    override fun presentacion(): String {
+        return "Soy $nombre, mentor con $experiencia años de experiencia del Distrito ${distrito.numero}"
+    }
+    
+    fun aconsejar(tributo: Tributo): String {
+        return "$nombre aconseja a ${tributo.nombre}: 'Recuerda que en la arena, la estrategia es tan importante como la fuerza'"
+    }
+}
+
+fun main() {
+    val distrito12 = Distrito(12, "Carbón")
+    val distrito2 = Distrito(2, "Construcción y armamento")
+
+    val arco = Habilidad("Arco y flecha")
+    val camuflaje = Habilidad("Camuflaje")
+    val fuerza = Habilidad("Fuerza física")
+
+    val katniss = Tributo("Katniss Everdeen", 16, distrito12, listOf(arco, camuflaje))
+    val peeta = Tributo("Peeta Mellark", 16, distrito12, listOf(camuflaje))
+    val cato = Tributo("Cato", 18, distrito2, listOf(fuerza))
+
+    val haymitch = Mentor("Haymitch Abernathy", 40, distrito12, 25)
+
+    println(katniss.presentacion())
+    println("Habilidades: ${katniss.mostrarHabilidades()}\n")
+    
+    println(peeta.presentacion())
+    println("Habilidades: ${peeta.mostrarHabilidades()}\n")
+    
+    println(cato.presentacion())
+    println("Habilidades: ${cato.mostrarHabilidades()}\n")
+
+    println(haymitch.presentacion())
+    println(haymitch.aconsejar(katniss))
+}
+
